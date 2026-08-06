@@ -13,6 +13,8 @@ import { AvatarView } from "../views/AvatarView";
 
 import { TableView } from "../views/TableView";
 
+import { TextView } from "../views/TextView";
+
 export interface MuralEntry {
   id: string;
   label: string;
@@ -35,6 +37,7 @@ export const registry: MuralEntry[] = [
   { id: "select", label: "Select", group: "Componentes", view: SelectView },
   { id: "avatar", label: "Avatar", group: "Componentes", view: AvatarView },
   { id: "table", label: "Table", group: "Componentes", view: TableView },
+  { id: "typography", label: "Typography", group: "Fundacao", view: TextView },
 ];
 
 /** Agrupa as entradas por grupo, preservando a ordem de insercao. */
