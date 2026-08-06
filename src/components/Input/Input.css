@@ -1,0 +1,147 @@
+/**
+ * Input (.dui-input)
+ *
+ * Duas firulas configuraveis:
+ * 1. Rotulo flutuante (opcional, via .dui-input--floating): o placeholder sobe
+ *    e encolhe ao focar/preencher. Detecta conteudo com :placeholder-shown, sem JS.
+ * 2. Linha de foco que preenche do CENTRO pros lados: .dui-input__line comeca
+ *    em scaleX(0) com transform-origin center e vai a scaleX(1) no foco.
+ *
+ * Cor da linha vem de --dui-input-accent (default primary, sobrescrita por
+ * accentColor via style inline). Especificidade baixa, so classe unica.
+ */
+
+.dui-input {
+  --dui-input-accent: var(--dui-color-primary-500);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-space-xs);
+  font-family: var(--dui-font-base);
+}
+
+/* rotulo fixo (modo sem floating) */
+.dui-input__top-label {
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-700);
+}
+
+/* area do campo: segura input, label flutuante e a linha */
+.dui-input__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-sm);
+  border-bottom: 1px solid var(--dui-color-neutral-200);
+}
+
+.dui-input__left {
+  display: inline-flex;
+  align-items: center;
+  color: var(--dui-color-neutral-400);
+}
+
+.dui-input__field {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-md);
+  color: var(--dui-color-neutral-900);
+  padding: var(--dui-space-sm) 0;
+}
+.dui-input__field::placeholder {
+  color: var(--dui-color-neutral-400);
+}
+
+/* tamanhos */
+.dui-input--sm .dui-input__field {
+  font-size: var(--dui-text-sm);
+  padding: var(--dui-space-xs) 0;
+}
+.dui-input--lg .dui-input__field {
+  font-size: var(--dui-text-lg);
+  padding: var(--dui-space-md) 0;
+}
+
+/* a linha animada: preenche do centro pros lados */
+.dui-input__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--dui-input-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dui-transition-base);
+  pointer-events: none;
+}
+.dui-input__control:focus-within .dui-input__line {
+  transform: scaleX(1);
+}
+
+/* ===== rotulo flutuante (opcional) ===== */
+.dui-input--floating .dui-input__field {
+  padding-top: 1.25rem;
+  padding-bottom: 0.35rem;
+}
+.dui-input--floating .dui-input__label {
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  color: var(--dui-color-neutral-400);
+  font-size: var(--dui-text-md);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform var(--dui-transition-base),
+    color var(--dui-transition-base);
+}
+.dui-input--floating.dui-input--sm .dui-input__label {
+  top: 1.1rem;
+  font-size: var(--dui-text-sm);
+}
+/* sobe quando focado OU quando ha conteudo */
+.dui-input--floating .dui-input__field:focus ~ .dui-input__label,
+.dui-input--floating .dui-input__field:not(:placeholder-shown) ~ .dui-input__label {
+  transform: translateY(-1.15rem) scale(0.78);
+  color: var(--dui-input-accent);
+}
+
+/* ===== estado de erro ===== */
+.dui-input--error .dui-input__control {
+  border-bottom-color: var(--dui-color-danger);
+}
+.dui-input--error .dui-input__line {
+  background: var(--dui-color-danger);
+  transform: scaleX(1);
+}
+.dui-input--error .dui-input__field:focus ~ .dui-input__label,
+.dui-input--error .dui-input__field:not(:placeholder-shown) ~ .dui-input__label {
+  color: var(--dui-color-danger);
+}
+
+/* mensagem (hint ou erro) */
+.dui-input__message {
+  font-size: var(--dui-text-xs);
+  color: var(--dui-color-neutral-500);
+}
+.dui-input--error .dui-input__message {
+  color: var(--dui-color-danger);
+}
+
+/* desabilitado */
+.dui-input--disabled {
+  opacity: 0.6;
+}
+.dui-input__field:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-input__line,
+  .dui-input--floating .dui-input__label {
+    transition-duration: 1ms;
+  }
+}
