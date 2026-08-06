@@ -1,0 +1,275 @@
+/**
+ * DatePicker (.dui-dp)
+ *
+ * Campo de texto com mascara (dd/mm/aaaa [HH:mm]) mais calendario proprio e
+ * hora opcional. Mesma linguagem do Input: linha central e label flutuante
+ * (via classe --label-up, controlada por foco/conteudo). Cor: --dui-dp-accent.
+ */
+
+.dui-dp {
+  --dui-dp-accent: var(--dui-color-primary-500);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-space-xs);
+  font-family: var(--dui-font-base);
+}
+
+.dui-dp__top-label {
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-700);
+}
+
+.dui-dp__control {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--dui-space-sm);
+  border-bottom: 1px solid var(--dui-color-neutral-200);
+}
+
+.dui-dp__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-bottom: var(--dui-space-sm);
+  color: var(--dui-color-neutral-400);
+  cursor: pointer;
+}
+.dui-dp--sm .dui-dp__icon {
+  margin-bottom: var(--dui-space-xs);
+}
+.dui-dp--lg .dui-dp__icon {
+  margin-bottom: var(--dui-space-md);
+}
+.dui-dp--floating .dui-dp__icon {
+  margin-bottom: 0.35rem;
+}
+.dui-dp__icon:hover:not(:disabled) {
+  color: var(--dui-dp-accent);
+}
+
+.dui-dp__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-md);
+  color: var(--dui-color-neutral-900);
+  padding: var(--dui-space-sm) 0;
+}
+.dui-dp__field::placeholder {
+  color: var(--dui-color-neutral-400);
+}
+.dui-dp--sm .dui-dp__field {
+  font-size: var(--dui-text-sm);
+  padding: var(--dui-space-xs) 0;
+}
+.dui-dp--lg .dui-dp__field {
+  font-size: var(--dui-text-lg);
+  padding: var(--dui-space-md) 0;
+}
+
+.dui-dp__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-400);
+  cursor: pointer;
+  padding: var(--dui-space-xs);
+  margin-bottom: calc(var(--dui-space-sm) - var(--dui-space-xs));
+  border-radius: var(--dui-radius-full);
+}
+.dui-dp--floating .dui-dp__clear {
+  margin-bottom: 0;
+}
+.dui-dp__clear:hover {
+  color: var(--dui-color-neutral-700);
+  background: var(--dui-color-neutral-100);
+}
+
+/* linha de foco central */
+.dui-dp__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--dui-dp-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dui-transition-base);
+  pointer-events: none;
+}
+.dui-dp__control:focus-within .dui-dp__line,
+.dui-dp--open .dui-dp__line {
+  transform: scaleX(1);
+}
+
+/* rotulo flutuante (mesmo mecanismo do Input, via --label-up) */
+.dui-dp--floating .dui-dp__field {
+  padding-top: 1.25rem;
+  padding-bottom: 0.35rem;
+}
+.dui-dp--floating .dui-dp__label {
+  position: absolute;
+  left: 1.6rem;
+  top: 1.25rem;
+  color: var(--dui-color-neutral-400);
+  font-size: var(--dui-text-md);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform var(--dui-transition-base), color var(--dui-transition-base);
+}
+.dui-dp--floating.dui-dp--label-up .dui-dp__label {
+  transform: translateY(-1.15rem) scale(0.78);
+  color: var(--dui-dp-accent);
+}
+
+/* popover calendario */
+.dui-dp__pop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 30;
+  margin-top: var(--dui-space-xs);
+  padding: var(--dui-space-md);
+  width: 17rem;
+  background: var(--dui-color-neutral-0);
+  border: 1px solid var(--dui-color-neutral-100);
+  border-radius: var(--dui-radius-md);
+  box-shadow: var(--dui-shadow-lg);
+}
+.dui-dp__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--dui-space-sm);
+}
+.dui-dp__month {
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-800);
+}
+.dui-dp__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-500);
+  cursor: pointer;
+  padding: var(--dui-space-xs);
+  border-radius: var(--dui-radius-sm);
+}
+.dui-dp__nav:hover {
+  background: var(--dui-color-neutral-100);
+}
+
+.dui-dp__weekdays,
+.dui-dp__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.dui-dp__weekday {
+  text-align: center;
+  font-size: var(--dui-text-xs);
+  color: var(--dui-color-neutral-400);
+  padding: var(--dui-space-xs) 0;
+}
+.dui-dp__cell {
+  aspect-ratio: 1;
+}
+.dui-dp__cell--empty {
+  background: transparent;
+}
+.dui-dp__day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-800);
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  cursor: pointer;
+  border-radius: var(--dui-radius-sm);
+}
+.dui-dp__day:hover:not(:disabled) {
+  background: var(--dui-color-neutral-100);
+}
+.dui-dp__day:disabled {
+  color: var(--dui-color-neutral-300);
+  cursor: not-allowed;
+}
+.dui-dp__day--today {
+  box-shadow: inset 0 0 0 1px var(--dui-dp-accent);
+}
+.dui-dp__day--selected {
+  background: var(--dui-dp-accent);
+  color: var(--dui-color-neutral-0);
+}
+.dui-dp__day--selected:hover:not(:disabled) {
+  background: var(--dui-dp-accent);
+}
+.dui-dp__day:focus-visible {
+  outline: 2px solid var(--dui-dp-accent);
+  outline-offset: 1px;
+}
+
+/* hora opcional */
+.dui-dp__time {
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-xs);
+  margin-top: var(--dui-space-md);
+  padding-top: var(--dui-space-md);
+  border-top: 1px solid var(--dui-color-neutral-100);
+}
+.dui-dp__time-label {
+  font-size: var(--dui-text-sm);
+  color: var(--dui-color-neutral-600);
+  margin-right: auto;
+}
+.dui-dp__time-input {
+  width: 3rem;
+  text-align: center;
+  border: 1px solid var(--dui-color-neutral-200);
+  border-radius: var(--dui-radius-sm);
+  padding: var(--dui-space-xs);
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  color: var(--dui-color-neutral-900);
+}
+.dui-dp__time-input:focus-visible {
+  outline: none;
+  border-color: var(--dui-dp-accent);
+}
+.dui-dp__time-sep {
+  color: var(--dui-color-neutral-500);
+}
+
+/* desabilitado */
+.dui-dp--disabled {
+  opacity: 0.6;
+}
+.dui-dp__field:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-dp__line,
+  .dui-dp--floating .dui-dp__label {
+    transition-duration: 1ms;
+  }
+}

@@ -5,3 +5,4 @@ export * from './Select';
 export * from './Avatar';
 export * from './Table';
 export * from './Text';
+export * from './DatePicker';
