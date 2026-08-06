@@ -21,3 +21,5 @@ export * from './components';
 
 // icones e marca
 export * from './icons';
+// meta: gerador do guia de uso para agentes (buildAgentDoc + tipos de manifesto)
+export * from './meta';

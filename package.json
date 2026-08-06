@@ -25,11 +25,14 @@
   },
   "scripts": {
     "dev": "vite --config vite.demo.config.ts",
-    "build": "tsc --noEmit && vite build",
-    "build:demo": "vite build --config vite.demo.config.ts",
+    "build": "npm run check:manifests && tsc --noEmit && vite build && npm run gen:agent",
+    "build:demo": "npm run check:manifests && npm run gen:agent && vite build --config vite.demo.config.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "gen:agent": "tsx scripts/gen-agent.ts",
+    "new:component": "tsx scripts/new-component.ts",
+    "check:manifests": "tsx scripts/check-manifests.ts"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -43,7 +46,8 @@
     "react-dom": "^18.3.1",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
-    "vite-plugin-dts": "^4.3.0"
+    "vite-plugin-dts": "^4.3.0",
+    "tsx": "^4.19.2"
   },
   "keywords": [
     "design-system",

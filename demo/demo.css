@@ -641,3 +641,34 @@ code {
     bottom: var(--dui-space-md);
   }
 }
+/* Abas do modal "Como usar" */
+.guide-tabs {
+  display: flex;
+  gap: var(--dui-space-xs);
+  padding: var(--dui-space-sm) var(--dui-space-lg) 0;
+  border-bottom: 1px solid var(--dui-color-neutral-100);
+}
+.guide-tab {
+  padding: var(--dui-space-sm) var(--dui-space-md);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--dui-color-neutral-500);
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  cursor: pointer;
+  transition: color var(--dui-transition-fast), border-color var(--dui-transition-fast);
+}
+.guide-tab:hover {
+  color: var(--dui-color-neutral-800);
+}
+.guide-tab--active {
+  color: var(--dui-color-primary-600);
+  border-bottom-color: var(--dui-color-primary-500);
+}
+.guide-tab:focus-visible {
+  outline: 2px solid var(--dui-color-primary-200);
+  outline-offset: 2px;
+  border-radius: var(--dui-radius-sm);
+}

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { DilisSymbol } from '@dilis/ui';
+import { useEffect, useMemo, useState } from 'react';
+import { DilisSymbol, buildAgentDoc } from '@dilis/ui';
 import { CodeBlock } from './CodeBlock';
+import { collectManifests } from '../agent/collectManifests';
 
 const REPO_URL = 'https://github.com/pedrosavio99/dilis-ui';
 const MURAL_URL = 'https://dilisui.netlify.app';
@@ -19,18 +20,27 @@ const steps = [
   {
     title: 'Usar os componentes',
     lang: 'tsx',
-    code: `import { Button, DilisLogo } from '@dilis/ui';
-
-<Button variant="primary" size="lg">Enviar</Button>`,
+    code: `import { Button, DilisLogo } from '@dilis/ui';\n\n<Button variant="primary" size="lg">Enviar</Button>`,
   },
 ];
 
+type Tab = 'passos' | 'agente';
+
 /**
- * Atalho flutuante da mural. Abre um painel com o passo a passo de uso
- * da lib, com codigo pronto pra copiar e os links do repo e da mural.
+ * Atalho flutuante da mural. Abre um painel com duas abas:
+ * - Passos: instalar e comecar em 3 passos.
+ * - Para IA: guia de uso gerado automaticamente a partir dos manifests dos
+ *   componentes, pronto pra colar no contexto de um agente e economizar token.
  */
 export function UsageGuide() {
   const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState<Tab>('passos');
+
+  const manifests = useMemo(() => collectManifests(), []);
+  const agentDoc = useMemo(
+    () => buildAgentDoc(manifests, { version: '0.1.0' }),
+    [manifests],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -83,7 +93,7 @@ export function UsageGuide() {
                 <DilisSymbol size={26} />
                 <div>
                   <strong>Como usar a Dilis UI</strong>
-                  <span>Instale e comece em 3 passos</span>
+                  <span>Instale, ou pegue o guia pronto pra IA</span>
                 </div>
               </div>
               <button
@@ -102,21 +112,54 @@ export function UsageGuide() {
               </button>
             </header>
 
-            <div className="guide-modal__body">
-              {steps.map((step, i) => (
-                <div className="guide-step" key={step.title}>
-                  <div className="guide-step__label">
-                    <span className="guide-step__num">{i + 1}</span>
-                    {step.title}
-                  </div>
-                  <CodeBlock lang={step.lang} code={step.code} />
-                </div>
-              ))}
+            <div className="guide-tabs" role="tablist" aria-label="Modo de uso">
+              <button
+                role="tab"
+                aria-selected={tab === 'passos'}
+                className={`guide-tab${tab === 'passos' ? ' guide-tab--active' : ''}`}
+                onClick={() => setTab('passos')}
+              >
+                3 passos
+              </button>
+              <button
+                role="tab"
+                aria-selected={tab === 'agente'}
+                className={`guide-tab${tab === 'agente' ? ' guide-tab--active' : ''}`}
+                onClick={() => setTab('agente')}
+              >
+                Para IA
+              </button>
+            </div>
 
-              <p className="guide-note">
-                Repositorio privado: o install via git precisa de acesso
-                autenticado ao GitHub (SSH ou token) na maquina ou no CI.
-              </p>
+            <div className="guide-modal__body">
+              {tab === 'passos' ? (
+                <>
+                  {steps.map((step, i) => (
+                    <div className="guide-step" key={step.title}>
+                      <div className="guide-step__label">
+                        <span className="guide-step__num">{i + 1}</span>
+                        {step.title}
+                      </div>
+                      <CodeBlock lang={step.lang} code={step.code} />
+                    </div>
+                  ))}
+
+                  <p className="guide-note">
+                    Repositorio privado: o install via git precisa de acesso
+                    autenticado ao GitHub (SSH ou token) na maquina ou no CI.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="guide-note">
+                    Guia gerado automaticamente a partir de {manifests.length}{' '}
+                    componente(s). Copie e cole no contexto do seu agente pra ele
+                    usar a lib sem receber o codigo fonte inteiro. Componente novo
+                    com manifest entra aqui sozinho.
+                  </p>
+                  <CodeBlock lang="markdown" code={agentDoc} />
+                </>
+              )}
             </div>
 
             <footer className="guide-modal__foot">
