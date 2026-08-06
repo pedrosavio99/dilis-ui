@@ -672,3 +672,62 @@ code {
   outline-offset: 2px;
   border-radius: var(--dui-radius-sm);
 }
+
+/* Busca de componente na sidebar da mural */
+.mural__search {
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 var(--dui-space-md) var(--dui-space-md);
+  padding: 0 var(--dui-space-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--dui-radius-md);
+  margin-top: 20px;
+}
+.mural__search:focus-within {
+  border-color: var(--dui-color-primary-400);
+}
+.mural__search-icon {
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+.mural__search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  padding: var(--dui-space-sm);
+}
+.mural__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+.mural__search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.mural__search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: var(--dui-space-xs);
+  border-radius: var(--dui-radius-full);
+}
+.mural__search-clear:hover {
+  color: #ffffff;
+}
+.mural__empty {
+  padding: var(--dui-space-md);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--dui-text-sm);
+}

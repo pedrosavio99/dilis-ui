@@ -1,0 +1,165 @@
+/**
+ * Table (.dui-table)
+ *
+ * Tabela generica com variantes por prop: acordeon (linha expansivel) e
+ * paginacao. Cor de destaque vem de --dui-table-accent. So classe unica.
+ */
+
+.dui-table {
+  --dui-table-accent: var(--dui-color-primary-500);
+  width: 100%;
+  font-family: var(--dui-font-base);
+}
+
+.dui-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dui-table__th {
+  text-align: left;
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-600);
+  border-bottom: 1px solid var(--dui-color-neutral-200);
+  white-space: nowrap;
+}
+.dui-table__th--center,
+.dui-table__td--center {
+  text-align: center;
+}
+.dui-table__th--right,
+.dui-table__td--right {
+  text-align: right;
+}
+.dui-table__th--toggle {
+  width: 2.5rem;
+}
+
+.dui-table__td {
+  color: var(--dui-color-neutral-800);
+  border-bottom: 1px solid var(--dui-color-neutral-100);
+}
+
+.dui-table__row {
+  transition: background-color var(--dui-transition-fast);
+}
+.dui-table__row:hover {
+  background: var(--dui-color-neutral-50);
+}
+.dui-table__row--clickable {
+  cursor: pointer;
+}
+
+.dui-table__td--toggle {
+  width: 2.5rem;
+  text-align: center;
+}
+.dui-table__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-400);
+  cursor: pointer;
+  padding: var(--dui-space-xs);
+  border-radius: var(--dui-radius-sm);
+}
+.dui-table__toggle svg {
+  transition: transform var(--dui-transition-base);
+}
+.dui-table__row--open .dui-table__toggle svg {
+  transform: rotate(90deg);
+  color: var(--dui-table-accent);
+}
+.dui-table__toggle:focus-visible {
+  outline: 2px solid var(--dui-table-accent);
+  outline-offset: 1px;
+}
+
+.dui-table__expanded {
+  background: var(--dui-color-neutral-50);
+  color: var(--dui-color-neutral-700);
+  border-bottom: 1px solid var(--dui-color-neutral-100);
+}
+
+.dui-table__empty {
+  text-align: center;
+  color: var(--dui-color-neutral-500);
+  padding: var(--dui-space-xl) var(--dui-space-md);
+}
+
+/* tamanhos */
+.dui-table--sm .dui-table__th,
+.dui-table--sm .dui-table__td,
+.dui-table--sm .dui-table__expanded {
+  padding: var(--dui-space-xs) var(--dui-space-sm);
+  font-size: var(--dui-text-xs);
+}
+.dui-table--md .dui-table__th,
+.dui-table--md .dui-table__td,
+.dui-table--md .dui-table__expanded {
+  padding: var(--dui-space-sm) var(--dui-space-md);
+  font-size: var(--dui-text-sm);
+}
+.dui-table--lg .dui-table__th,
+.dui-table--lg .dui-table__td,
+.dui-table--lg .dui-table__expanded {
+  padding: var(--dui-space-md);
+  font-size: var(--dui-text-md);
+}
+
+/* paginacao */
+.dui-table__pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-xs);
+  justify-content: flex-end;
+  padding-top: var(--dui-space-md);
+}
+.dui-table__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--dui-space-sm);
+  border: 1px solid var(--dui-color-neutral-200);
+  border-radius: var(--dui-radius-md);
+  background: transparent;
+  color: var(--dui-color-neutral-700);
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  cursor: pointer;
+  transition: background-color var(--dui-transition-fast),
+    border-color var(--dui-transition-fast),
+    color var(--dui-transition-fast);
+}
+.dui-table__page-btn:hover:not(:disabled) {
+  background: var(--dui-color-neutral-100);
+}
+.dui-table__page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.dui-table__page-btn--active {
+  background: var(--dui-table-accent);
+  border-color: var(--dui-table-accent);
+  color: var(--dui-color-neutral-0);
+}
+.dui-table__page-btn:focus-visible {
+  outline: 2px solid var(--dui-table-accent);
+  outline-offset: 2px;
+}
+.dui-table__ellipsis {
+  padding: 0 var(--dui-space-xs);
+  color: var(--dui-color-neutral-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-table__row,
+  .dui-table__toggle svg,
+  .dui-table__page-btn {
+    transition-duration: 1ms;
+  }
+}
