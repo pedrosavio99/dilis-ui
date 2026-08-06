@@ -1,0 +1,187 @@
+/**
+ * Select (.dui-select)
+ *
+ * Mesma linguagem visual do Input/SearchInput: linha de foco que preenche do
+ * CENTRO pros lados, rotulo flutuante opcional e dropdown de opcoes. O gatilho
+ * e um button (nao o <select> nativo) pra manter o estilo e a animacao.
+ * Cor vem de --dui-select-accent. So classe unica, sem !important.
+ */
+
+.dui-select {
+  --dui-select-accent: var(--dui-color-primary-500);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-space-xs);
+  font-family: var(--dui-font-base);
+}
+
+.dui-select__top-label {
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-700);
+}
+
+.dui-select__control {
+  position: relative;
+  border-bottom: 1px solid var(--dui-color-neutral-200);
+}
+
+.dui-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dui-space-sm);
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-md);
+  color: var(--dui-color-neutral-900);
+  padding: var(--dui-space-sm) 0;
+}
+.dui-select__trigger:focus {
+  outline: none;
+}
+
+.dui-select--sm .dui-select__trigger {
+  font-size: var(--dui-text-sm);
+  padding: var(--dui-space-xs) 0;
+}
+.dui-select--lg .dui-select__trigger {
+  font-size: var(--dui-text-lg);
+  padding: var(--dui-space-md) 0;
+}
+
+.dui-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dui-select__value--placeholder {
+  color: var(--dui-color-neutral-400);
+}
+
+.dui-select__chevron {
+  flex-shrink: 0;
+  color: var(--dui-color-neutral-400);
+  transition: transform var(--dui-transition-base);
+}
+.dui-select--open .dui-select__chevron {
+  transform: rotate(180deg);
+}
+
+/* linha de foco: preenche do centro pros lados */
+.dui-select__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--dui-select-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dui-transition-base);
+  pointer-events: none;
+}
+.dui-select__control:focus-within .dui-select__line,
+.dui-select--open .dui-select__line {
+  transform: scaleX(1);
+}
+
+/* rotulo flutuante (opcional) */
+.dui-select--floating .dui-select__trigger {
+  padding-top: 1.25rem;
+  padding-bottom: 0.35rem;
+}
+.dui-select--floating .dui-select__label {
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  color: var(--dui-color-neutral-400);
+  font-size: var(--dui-text-md);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform var(--dui-transition-base),
+    color var(--dui-transition-base);
+}
+.dui-select--floating.dui-select--open .dui-select__label,
+.dui-select--floating.dui-select--filled .dui-select__label {
+  transform: translateY(-1.15rem) scale(0.78);
+  color: var(--dui-select-accent);
+}
+
+/* dropdown */
+.dui-select__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: var(--dui-space-xs) 0 0;
+  padding: var(--dui-space-xs);
+  list-style: none;
+  background: var(--dui-color-neutral-0);
+  border: 1px solid var(--dui-color-neutral-100);
+  border-radius: var(--dui-radius-md);
+  box-shadow: var(--dui-shadow-lg);
+  max-height: 16rem;
+  overflow-y: auto;
+}
+.dui-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dui-space-sm);
+  border-radius: var(--dui-radius-sm);
+  cursor: pointer;
+  color: var(--dui-color-neutral-800);
+  font-size: var(--dui-text-sm);
+}
+.dui-select__option--active {
+  background: var(--dui-color-primary-50);
+  color: var(--dui-color-primary-700);
+}
+.dui-select__option--selected {
+  font-weight: var(--dui-weight-medium);
+}
+.dui-select__check {
+  color: var(--dui-select-accent);
+}
+
+/* erro */
+.dui-select--error .dui-select__control {
+  border-bottom-color: var(--dui-color-danger);
+}
+.dui-select--error .dui-select__line {
+  background: var(--dui-color-danger);
+  transform: scaleX(1);
+}
+
+.dui-select__message {
+  font-size: var(--dui-text-xs);
+  color: var(--dui-color-neutral-500);
+}
+.dui-select--error .dui-select__message {
+  color: var(--dui-color-danger);
+}
+
+/* desabilitado */
+.dui-select--disabled {
+  opacity: 0.6;
+}
+.dui-select__trigger:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-select__line,
+  .dui-select__chevron,
+  .dui-select--floating .dui-select__label {
+    transition-duration: 1ms;
+  }
+}

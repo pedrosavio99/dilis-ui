@@ -1,0 +1,177 @@
+/**
+ * SearchInput (.dui-search)
+ *
+ * Mesma linguagem visual do Input: linha de foco que preenche do CENTRO pros
+ * lados (scaleX de transform-origin center) e rotulo flutuante opcional.
+ * Extras de busca: lupa a esquerda, botao de limpar a direita e dropdown de
+ * resultados. Cor vem de --dui-search-accent (default primary, sobrescrita por
+ * accentColor). So classe unica, sem !important.
+ */
+
+.dui-search {
+  --dui-search-accent: var(--dui-color-primary-500);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-space-xs);
+  font-family: var(--dui-font-base);
+}
+
+.dui-search__top-label {
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-700);
+}
+
+.dui-search__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-sm);
+  border-bottom: 1px solid var(--dui-color-neutral-200);
+}
+
+.dui-search__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--dui-color-neutral-400);
+}
+
+.dui-search__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-md);
+  color: var(--dui-color-neutral-900);
+  padding: var(--dui-space-sm) 0;
+}
+.dui-search__field::placeholder {
+  color: var(--dui-color-neutral-400);
+}
+.dui-search__field::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dui-search--sm .dui-search__field {
+  font-size: var(--dui-text-sm);
+  padding: var(--dui-space-xs) 0;
+}
+.dui-search--lg .dui-search__field {
+  font-size: var(--dui-text-lg);
+  padding: var(--dui-space-md) 0;
+}
+
+.dui-search__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-400);
+  cursor: pointer;
+  padding: var(--dui-space-xs);
+  border-radius: var(--dui-radius-full);
+  transition: color var(--dui-transition-fast),
+    background-color var(--dui-transition-fast);
+}
+.dui-search__clear:hover {
+  color: var(--dui-color-neutral-700);
+  background: var(--dui-color-neutral-100);
+}
+.dui-search__clear:focus-visible {
+  outline: 2px solid var(--dui-search-accent);
+  outline-offset: 2px;
+}
+
+/* linha de foco: preenche do centro pros lados */
+.dui-search__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--dui-search-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dui-transition-base);
+  pointer-events: none;
+}
+.dui-search__control:focus-within .dui-search__line {
+  transform: scaleX(1);
+}
+
+/* rotulo flutuante (opcional). left compensa a lupa + gap */
+.dui-search--floating .dui-search__field {
+  padding-top: 1.25rem;
+  padding-bottom: 0.35rem;
+}
+.dui-search--floating .dui-search__label {
+  position: absolute;
+  left: 1.6rem;
+  top: 1.25rem;
+  color: var(--dui-color-neutral-400);
+  font-size: var(--dui-text-md);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform var(--dui-transition-base),
+    color var(--dui-transition-base);
+}
+.dui-search--floating .dui-search__field:focus ~ .dui-search__label,
+.dui-search--floating .dui-search__field:not(:placeholder-shown) ~ .dui-search__label {
+  transform: translateY(-1.15rem) scale(0.78);
+  color: var(--dui-search-accent);
+}
+
+.dui-search--disabled {
+  opacity: 0.6;
+}
+.dui-search__field:disabled {
+  cursor: not-allowed;
+}
+
+/* dropdown de resultados */
+.dui-search__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: var(--dui-space-xs) 0 0;
+  padding: var(--dui-space-xs);
+  list-style: none;
+  background: var(--dui-color-neutral-0);
+  border: 1px solid var(--dui-color-neutral-100);
+  border-radius: var(--dui-radius-md);
+  box-shadow: var(--dui-shadow-lg);
+  max-height: 16rem;
+  overflow-y: auto;
+}
+.dui-search__option {
+  padding: var(--dui-space-sm);
+  border-radius: var(--dui-radius-sm);
+  cursor: pointer;
+  color: var(--dui-color-neutral-800);
+  font-size: var(--dui-text-sm);
+}
+.dui-search__option--active {
+  background: var(--dui-color-primary-50);
+  color: var(--dui-color-primary-700);
+}
+.dui-search__status {
+  padding: var(--dui-space-sm);
+  color: var(--dui-color-neutral-500);
+  font-size: var(--dui-text-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-search__line,
+  .dui-search--floating .dui-search__label {
+    transition-duration: 1ms;
+  }
+}

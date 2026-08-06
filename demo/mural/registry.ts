@@ -5,6 +5,10 @@ import { BrandView } from '../views/BrandView';
 import { ButtonsView } from '../views/ButtonsView';
 import { InputView } from '../views/InputView';
 
+import { SearchInputView } from "../views/SearchInputView";
+
+import { SelectView } from "../views/SelectView";
+
 export interface MuralEntry {
   id: string;
   label: string;
@@ -23,6 +27,8 @@ export const registry: MuralEntry[] = [
   { id: 'marca', label: 'Marca', group: 'Fundacao', view: BrandView },
   { id: 'button', label: 'Button', group: 'Componentes', view: ButtonsView },
   { id: 'input', label: 'Input', group: 'Componentes', view: InputView },
+  { id: "search", label: "SearchInput", group: "Componentes", view: SearchInputView },
+  { id: "select", label: "Select", group: "Componentes", view: SelectView },
 ];
 
 /** Agrupa as entradas por grupo, preservando a ordem de insercao. */
