@@ -9,7 +9,7 @@ export type SearchInputSize = 'sm' | 'md' | 'lg';
  * selecionar.
  */
 export interface SearchInputProps<T>
-  extends Omit
+  extends Omit<
     InputHTMLAttributes<HTMLInputElement>,
     'size' | 'onChange' | 'onSelect' | 'value' | 'defaultValue'
   > {
