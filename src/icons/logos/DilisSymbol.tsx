@@ -1,0 +1,48 @@
+import { forwardRef, memo } from 'react';
+import type { SVGProps } from 'react';
+import { cn } from '../../utils/cn';
+
+const RATIO = 42 / 62; // largura / altura do viewBox
+
+export interface DilisSymbolProps
+  extends Omit<SVGProps<SVGSVGElement>, 'width' | 'height'> {
+  /** Altura do simbolo em px. A largura acompanha a proporcao. Padrao: 28. */
+  size?: number;
+  /** Cor de preenchimento. Padrao: azul da marca (via token). */
+  color?: string;
+  /** Texto acessivel. Se ausente, fica como decorativo. */
+  title?: string;
+  className?: string;
+}
+
+const DilisSymbolBase = forwardRef<SVGSVGElement, DilisSymbolProps>(
+  function DilisSymbol({ size = 28, color, title, className, ...rest }, ref) {
+    const width = Math.round(size * RATIO);
+    return (
+      <svg
+        ref={ref}
+        width={width}
+        height={size}
+        viewBox="0 0 42 62"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={cn('dui-logo', className)}
+        style={color ? { color } : undefined}
+        role={title ? 'img' : undefined}
+        aria-hidden={title ? undefined : true}
+        aria-label={title}
+        {...rest}
+      >
+        {title ? <title>{title}</title> : null}
+        <path
+          d="M6.04737 55.0848C2.00232 51.0264 0 46.1092 0 40.3839C0 34.6585 2.00232 29.7439 6.04737 25.6829C8.39057 23.332 11.158 21.6651 14.3546 20.5985C16.3569 19.9576 18.1724 19.6156 20.3868 19.6156H30.098C30.0551 22.0096 29.2041 24.0591 27.5427 25.726C25.8813 27.3929 23.8789 28.2036 21.5357 28.2036H20.3843C17.0614 28.2036 14.5213 29.3993 12.1377 31.7933C9.79447 34.1443 8.60267 37.0069 8.60267 40.3839C8.60267 43.7608 9.79447 46.6235 12.1377 49.0149C14.5238 51.3659 17.377 52.5616 20.6999 52.5616C24.0228 52.5616 26.919 51.3659 29.2622 49.0149C31.6458 46.6209 32.8401 43.7583 32.8401 40.3839V8.588C32.8401 6.23707 33.6911 4.1876 35.3525 2.52067C37.014 0.853734 39.0592 0 41.3999 0V40.3864C41.3999 46.1117 39.3546 51.0264 35.3096 55.0873C31.262 59.1483 26.4064 61.1547 20.6999 61.1547C14.9934 61.1547 10.0924 59.1457 6.04737 55.0873"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
+);
+
+/** Simbolo da Dilis (a letra d). Cor via currentColor. */
+export const DilisSymbol = memo(DilisSymbolBase);
+DilisSymbol.displayName = 'DilisSymbol';

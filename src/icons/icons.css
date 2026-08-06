@@ -1,0 +1,13 @@
+/* Base dos icones e logos. Cor default no azul da marca via token. */
+
+.dui-icon {
+  display: inline-block;
+  line-height: 0;
+  color: var(--dui-color-neutral-800);
+}
+
+.dui-logo {
+  display: inline-block;
+  line-height: 0;
+  color: var(--dui-color-primary-500);
+}

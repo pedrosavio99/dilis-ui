@@ -1,0 +1,142 @@
+/**
+ * Button (.dui-btn)
+ *
+ * Regra de especificidade: tudo aqui usa seletor de classe unica
+ * (.dui-btn, .dui-btn--primary). Nada de aninhamento pesado nem !important.
+ * Isso mantem a especificidade baixa e deixa as utilities do Tailwind
+ * (ex: className="bg-black") sobrescreverem sem esforco.
+ */
+
+.dui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dui-space-sm);
+  font-family: var(--dui-font-base);
+  font-weight: var(--dui-weight-medium);
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--dui-radius-md);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color var(--dui-transition-fast),
+    border-color var(--dui-transition-fast),
+    color var(--dui-transition-fast),
+    box-shadow var(--dui-transition-fast);
+}
+
+.dui-btn:focus-visible {
+  outline: 2px solid var(--dui-color-primary-400);
+  outline-offset: 2px;
+}
+
+.dui-btn:disabled,
+.dui-btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* tamanhos */
+.dui-btn--sm {
+  height: 2rem;
+  padding: 0 var(--dui-space-md);
+  font-size: var(--dui-text-sm);
+}
+
+.dui-btn--md {
+  height: 2.5rem;
+  padding: 0 var(--dui-space-lg);
+  font-size: var(--dui-text-md);
+}
+
+.dui-btn--lg {
+  height: 3rem;
+  padding: 0 var(--dui-space-xl);
+  font-size: var(--dui-text-lg);
+}
+
+/* largura total */
+.dui-btn--full {
+  width: 100%;
+}
+
+/* variante primary */
+.dui-btn--primary {
+  background-color: var(--dui-color-primary-500);
+  color: var(--dui-color-neutral-0);
+}
+.dui-btn--primary:hover:not(:disabled) {
+  background-color: var(--dui-color-primary-600);
+}
+.dui-btn--primary:active:not(:disabled) {
+  background-color: var(--dui-color-primary-700);
+}
+
+/* variante secondary */
+.dui-btn--secondary {
+  background-color: var(--dui-color-neutral-800);
+  color: var(--dui-color-neutral-0);
+}
+.dui-btn--secondary:hover:not(:disabled) {
+  background-color: var(--dui-color-neutral-900);
+}
+
+/* variante outline */
+.dui-btn--outline {
+  background-color: transparent;
+  color: var(--dui-color-primary-600);
+  border-color: var(--dui-color-primary-500);
+}
+.dui-btn--outline:hover:not(:disabled) {
+  background-color: var(--dui-color-primary-50);
+}
+
+/* variante ghost */
+.dui-btn--ghost {
+  background-color: transparent;
+  color: var(--dui-color-neutral-700);
+}
+.dui-btn--ghost:hover:not(:disabled) {
+  background-color: var(--dui-color-neutral-100);
+}
+
+/* variante danger */
+.dui-btn--danger {
+  background-color: var(--dui-color-danger);
+  color: var(--dui-color-neutral-0);
+}
+.dui-btn--danger:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+/* estado loading */
+.dui-btn--loading {
+  cursor: progress;
+}
+
+.dui-btn__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--dui-radius-full);
+  animation: dui-spin 0.6s linear infinite;
+}
+
+.dui-btn__icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+@keyframes dui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-btn__spinner {
+    animation-duration: 1.4s;
+  }
+}

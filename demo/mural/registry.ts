@@ -1,0 +1,35 @@
+import type { ComponentType } from 'react';
+import { TokensView } from '../views/TokensView';
+import { ColorsView } from '../views/ColorsView';
+import { BrandView } from '../views/BrandView';
+import { ButtonsView } from '../views/ButtonsView';
+
+export interface MuralEntry {
+  id: string;
+  label: string;
+  group: string;
+  view: ComponentType;
+}
+
+/**
+ * Fonte unica das secoes da mural.
+ * Para adicionar um novo componente na vitrine, crie a view em
+ * demo/views/ e registre uma entrada aqui. Nada mais precisa mudar.
+ */
+export const registry: MuralEntry[] = [
+  { id: 'tokens', label: 'Tokens', group: 'Fundacao', view: TokensView },
+  { id: 'cores', label: 'Cores', group: 'Fundacao', view: ColorsView },
+  { id: 'marca', label: 'Marca', group: 'Fundacao', view: BrandView },
+  { id: 'button', label: 'Button', group: 'Componentes', view: ButtonsView },
+];
+
+/** Agrupa as entradas por grupo, preservando a ordem de insercao. */
+export function groupEntries(entries: MuralEntry[]): [string, MuralEntry[]][] {
+  const map = new Map<string, MuralEntry[]>();
+  for (const entry of entries) {
+    const list = map.get(entry.group) ?? [];
+    list.push(entry);
+    map.set(entry.group, list);
+  }
+  return Array.from(map.entries());
+}

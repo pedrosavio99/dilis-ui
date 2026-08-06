@@ -1,0 +1,97 @@
+/**
+ * Variaveis CSS da Dilis UI.
+ *
+ * Toda estilizacao dos componentes referencia estas variaveis
+ * (nunca valores fixos). Assim da pra tematizar tudo sobrescrevendo
+ * as variaveis no :root do projeto que consome a lib.
+ *
+ * Prefixo: --dui-  (dilis ui)
+ */
+
+:root {
+  /* cor primaria */
+  --dui-color-primary-50: #e6f6fd;
+  --dui-color-primary-100: #ccecfb;
+  --dui-color-primary-200: #99d9f6;
+  --dui-color-primary-300: #66c6f0;
+  --dui-color-primary-400: #33b2eb;
+  --dui-color-primary-500: #009fe3;
+  --dui-color-primary-600: #0087c1;
+  --dui-color-primary-700: #006f9f;
+  --dui-color-primary-800: #00577d;
+  --dui-color-primary-900: #00405b;
+
+  /* neutros */
+  --dui-color-neutral-0: #ffffff;
+  --dui-color-neutral-50: #f5f6f7;
+  --dui-color-neutral-100: #e9eaec;
+  --dui-color-neutral-200: #d3d5d8;
+  --dui-color-neutral-300: #b0b3b8;
+  --dui-color-neutral-400: #85898f;
+  --dui-color-neutral-500: #5f636a;
+  --dui-color-neutral-600: #474a50;
+  --dui-color-neutral-700: #3a3d42;
+  --dui-color-neutral-800: #333333;
+  --dui-color-neutral-900: #1a1a1a;
+  --dui-color-neutral-1000: #000000;
+
+  /* semanticas */
+  --dui-color-info: #009fe3;
+  --dui-color-success: #1aa053;
+  --dui-color-warning: #f5a623;
+  --dui-color-danger: #e4123b;
+
+  /* tipografia */
+  --dui-font-base: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --dui-font-condensed: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  --dui-font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --dui-weight-light: 300;
+  --dui-weight-regular: 400;
+  --dui-weight-medium: 500;
+  --dui-weight-bold: 700;
+  --dui-weight-black: 900;
+
+  --dui-text-xs: 0.75rem;
+  --dui-text-sm: 0.875rem;
+  --dui-text-md: 1rem;
+  --dui-text-lg: 1.125rem;
+  --dui-text-xl: 1.25rem;
+  --dui-text-2xl: 1.5rem;
+  --dui-text-3xl: 1.875rem;
+  --dui-text-4xl: 2.25rem;
+  --dui-text-5xl: 3rem;
+
+  --dui-leading-tight: 1.15;
+  --dui-leading-snug: 1.35;
+  --dui-leading-normal: 1.5;
+  --dui-leading-relaxed: 1.7;
+
+  /* espacamento */
+  --dui-space-none: 0;
+  --dui-space-xs: 0.25rem;
+  --dui-space-sm: 0.5rem;
+  --dui-space-md: 1rem;
+  --dui-space-lg: 1.5rem;
+  --dui-space-xl: 2rem;
+  --dui-space-2xl: 3rem;
+  --dui-space-3xl: 4rem;
+
+  /* radius */
+  --dui-radius-none: 0;
+  --dui-radius-sm: 0.25rem;
+  --dui-radius-md: 0.5rem;
+  --dui-radius-lg: 0.75rem;
+  --dui-radius-xl: 1rem;
+  --dui-radius-full: 9999px;
+
+  /* sombras */
+  --dui-shadow-sm: 0 1px 2px rgba(51, 51, 51, 0.08);
+  --dui-shadow-md: 0 4px 12px rgba(51, 51, 51, 0.12);
+  --dui-shadow-lg: 0 10px 24px rgba(51, 51, 51, 0.16);
+  --dui-shadow-xl: 0 20px 48px rgba(51, 51, 51, 0.2);
+
+  /* transicoes */
+  --dui-transition-fast: 120ms ease;
+  --dui-transition-base: 200ms ease;
+}

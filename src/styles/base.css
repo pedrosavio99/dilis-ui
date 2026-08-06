@@ -1,0 +1,10 @@
+/**
+ * Reset minimo da Dilis UI.
+ * Escopo enxuto de proposito para nao brigar com o CSS do projeto host.
+ * Aplica so o essencial em cima dos componentes .dui-*.
+ */
+
+.dui-btn,
+.dui-btn * {
+  box-sizing: border-box;
+}
