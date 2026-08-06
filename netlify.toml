@@ -1,0 +1,17 @@
+# Deploy da mural (vitrine) no Netlify.
+# A lib (npm run build) gera dist/ sem index.html, entao NAO e o que publicamos.
+# A mural (npm run build:demo) gera dist-demo/ com index.html: esse e o site.
+
+[build]
+  command = "npm run build:demo"
+  publish = "dist-demo"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# A mural e uma SPA (navegacao por estado, sem rotas de URL).
+# O redirect garante que qualquer caminho caia no index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -10,6 +10,8 @@ os componentes durante o desenvolvimento.
 
 Versao atual: `0.1.0`
 
+Mural online: https://dilisui.netlify.app
+
 ---
 
 ## O que ja tem na v1
@@ -17,7 +19,9 @@ Versao atual: `0.1.0`
 - Tokens completos (cores, tipografia, espacamento, radius, sombras, breakpoints)
 - Variaveis CSS `--dui-*` para tematizacao
 - Componente `Button`
-- Vitrine (mural) com as secoes Tokens, Cores e Button
+- Marca como componentes (`DilisLogo`, `DilisSymbol`) e `Icon` generico
+- Vitrine (mural) com Tokens, Cores, Marca e Button, cada exemplo com codigo
+  pronto pra copiar
 - Build em library mode (ESM + CJS + tipos + CSS unico)
 - CI no GitHub Actions
 
@@ -36,9 +40,42 @@ direto de `src/`, entao qualquer edicao em componente ou token reflete na hora.
 Outros scripts:
 
 ```bash
-npm run build      # gera a lib em dist/
+npm run build      # gera a LIB em dist/ (ESM + CJS + tipos + CSS)
+npm run build:demo # gera a MURAL em dist-demo/ (o site publicavel)
 npm run typecheck  # checagem de tipos sem emitir
 npm run preview    # preview de um build
+```
+
+Atencao a diferenca: `build` gera a biblioteca (sem index.html, e o que vai pro
+pacote npm). `build:demo` gera a mural (com index.html, e o que vira site).
+
+---
+
+## Ver online (deploy da mural)
+
+O site publicado e a mural, ou seja o resultado de `npm run build:demo`
+(pasta `dist-demo/`). O erro comum e o Netlify tentar publicar `dist/` (a lib,
+sem index.html), o que da 404.
+
+O `netlify.toml` na raiz ja deixa isso resolvido:
+
+```toml
+[build]
+  command = "npm run build:demo"
+  publish = "dist-demo"
+```
+
+No painel do Netlify, se ele nao pegar o toml automaticamente, configure em
+Site settings > Build & deploy:
+
+- Build command: `npm run build:demo`
+- Publish directory: `dist-demo`
+
+Para publicar pela CLI:
+
+```bash
+npm run build:demo
+npx netlify deploy --prod --dir=dist-demo
 ```
 
 ---
@@ -101,7 +138,7 @@ demo/                      a mural (nao vai pro pacote publicado)
 Pelo GitHub (sem precisar publicar no npm):
 
 ```bash
-npm install git+https://github.com/SEU_USUARIO/dilis-ui.git
+npm install git+https://github.com/pedrosavio99/dilis-ui.git
 ```
 
 O `prepare` roda o build automaticamente na instalacao, entao o `dist/` e
@@ -283,7 +320,7 @@ git push --follow-tags
 Os projetos que consomem a lib apontam para uma tag ou branch especifica:
 
 ```bash
-npm install git+https://github.com/SEU_USUARIO/dilis-ui.git#v0.1.0
+npm install git+https://github.com/pedrosavio99/dilis-ui.git#v0.1.0
 ```
 
 ---

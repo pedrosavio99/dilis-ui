@@ -463,3 +463,181 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+/* guia de uso flutuante */
+.guide-fab {
+  position: fixed;
+  right: var(--dui-space-xl);
+  bottom: var(--dui-space-xl);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dui-space-sm);
+  padding: 0 var(--dui-space-lg);
+  height: 3rem;
+  border: none;
+  border-radius: var(--dui-radius-full);
+  background: var(--dui-color-primary-500);
+  color: var(--dui-color-neutral-0);
+  font-family: var(--dui-font-base);
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  cursor: pointer;
+  box-shadow: var(--dui-shadow-lg);
+  transition: background var(--dui-transition-fast),
+    transform var(--dui-transition-fast);
+}
+.guide-fab:hover {
+  background: var(--dui-color-primary-600);
+  transform: translateY(-1px);
+}
+.guide-fab:focus-visible {
+  outline: 2px solid var(--dui-color-primary-200);
+  outline-offset: 3px;
+}
+
+.guide-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--dui-space-lg);
+  background: rgba(26, 26, 26, 0.55);
+  animation: guide-fade var(--dui-transition-base);
+}
+
+.guide-modal {
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--dui-color-neutral-0);
+  border-radius: var(--dui-radius-xl);
+  box-shadow: var(--dui-shadow-xl);
+  animation: guide-rise var(--dui-transition-base);
+}
+
+.guide-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dui-space-lg) var(--dui-space-lg) var(--dui-space-md);
+  border-bottom: 1px solid var(--dui-color-neutral-100);
+}
+.guide-modal__title {
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-sm);
+}
+.guide-modal__title strong {
+  display: block;
+  font-weight: var(--dui-weight-black);
+  color: var(--dui-color-neutral-900);
+}
+.guide-modal__title span {
+  font-size: var(--dui-text-xs);
+  color: var(--dui-color-neutral-500);
+}
+.guide-modal__close {
+  display: inline-flex;
+  padding: var(--dui-space-xs);
+  border: none;
+  border-radius: var(--dui-radius-md);
+  background: transparent;
+  color: var(--dui-color-neutral-500);
+  cursor: pointer;
+  transition: background var(--dui-transition-fast);
+}
+.guide-modal__close:hover {
+  background: var(--dui-color-neutral-100);
+  color: var(--dui-color-neutral-800);
+}
+
+.guide-modal__body {
+  padding: var(--dui-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-space-lg);
+}
+.guide-step__label {
+  display: flex;
+  align-items: center;
+  gap: var(--dui-space-sm);
+  margin-bottom: var(--dui-space-sm);
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  color: var(--dui-color-neutral-800);
+}
+.guide-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: var(--dui-radius-full);
+  background: var(--dui-color-primary-50);
+  color: var(--dui-color-primary-700);
+  font-size: var(--dui-text-xs);
+  font-weight: var(--dui-weight-bold);
+}
+.guide-step .code {
+  border-radius: var(--dui-radius-md);
+}
+.guide-note {
+  margin: 0;
+  font-size: var(--dui-text-xs);
+  color: var(--dui-color-neutral-500);
+  line-height: var(--dui-leading-relaxed);
+}
+
+.guide-modal__foot {
+  display: flex;
+  gap: var(--dui-space-sm);
+  padding: var(--dui-space-md) var(--dui-space-lg) var(--dui-space-lg);
+  border-top: 1px solid var(--dui-color-neutral-100);
+}
+.guide-modal__foot a {
+  flex: 1;
+  text-align: center;
+  padding: var(--dui-space-sm);
+  border: 1px solid var(--dui-color-neutral-200);
+  border-radius: var(--dui-radius-md);
+  color: var(--dui-color-neutral-800);
+  text-decoration: none;
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  transition: border-color var(--dui-transition-fast),
+    color var(--dui-transition-fast);
+}
+.guide-modal__foot a:hover {
+  border-color: var(--dui-color-primary-500);
+  color: var(--dui-color-primary-600);
+}
+
+@keyframes guide-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes guide-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-overlay,
+  .guide-modal {
+    animation: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .guide-fab {
+    right: var(--dui-space-md);
+    bottom: var(--dui-space-md);
+  }
+}
