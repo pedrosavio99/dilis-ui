@@ -9,15 +9,32 @@ export interface AgentDocOptions {
   stylesImport?: string;
 }
 
-/** Ordena por grupo (mantendo Componentes por ultimo) e depois por nome. */
-function sortManifests(list: ComponentManifest[]): ComponentManifest[] {
-  const groupWeight = (g: string) => (g === 'Marca' ? 0 : g === 'Componentes' ? 2 : 1);
-  return [...list].sort((a, b) => {
-    const ga = a.group ?? 'Componentes';
-    const gb = b.group ?? 'Componentes';
-    if (ga !== gb) return groupWeight(ga) - groupWeight(gb);
-    return a.name.localeCompare(b.name);
-  });
+/** Peso de ordenacao de cada grupo: Marca, Fundacao, outros, Componentes. */
+function groupWeight(g: string): number {
+  if (g === 'Marca') return 0;
+  if (g === 'Fundacao') return 1;
+  if (g === 'Componentes') return 3;
+  return 2;
+}
+
+/**
+ * Agrupa os manifests por grupo e devolve as secoes ja ordenadas
+ * (Marca, Fundacao, ..., Componentes), com os itens de cada secao por nome.
+ */
+function groupSections(list: ComponentManifest[]): [string, ComponentManifest[]][] {
+  const map = new Map<string, ComponentManifest[]>();
+  for (const m of list) {
+    const g = m.group ?? 'Componentes';
+    const arr = map.get(g) ?? [];
+    arr.push(m);
+    map.set(g, arr);
+  }
+  return Array.from(map.entries())
+    .sort(([a], [b]) => groupWeight(a) - groupWeight(b))
+    .map(([group, items]) => [
+      group,
+      [...items].sort((x, y) => x.name.localeCompare(y.name)),
+    ]);
 }
 
 function propLine(p: ManifestProp): string {
@@ -64,7 +81,7 @@ export function buildAgentDoc(
     `# Dilis UI${version} - guia de uso para agentes`,
     '',
     `Biblioteca React de componentes em CSS puro com tokens da marca. Consuma a`,
-    `lib por este guia, sem abrir o codigo fonte. ${manifests.length} componente(s) documentado(s).`,
+    `lib por este guia, sem abrir o codigo fonte. ${manifests.length} item(ns) documentado(s).`,
     '',
     '## Regras globais',
     `- Importe o CSS uma unica vez no entry do app: \`${stylesImport}\``,
@@ -77,7 +94,9 @@ export function buildAgentDoc(
     '- Tokens em runtime: `import { theme } from \'' + pkg + '\'` (ex: `theme.colors.primary[500]`).',
   ].join('\n');
 
-  const blocks = sortManifests(manifests).map(componentBlock);
+  const sections = groupSections(manifests).map(([group, items]) =>
+    [`## ${group}`, '', items.map(componentBlock).join('\n\n')].join('\n'),
+  );
 
-  return [header, '', '## Componentes', '', blocks.join('\n\n')].join('\n') + '\n';
+  return [header, '', sections.join('\n\n')].join('\n') + '\n';
 }

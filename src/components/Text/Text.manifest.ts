@@ -4,14 +4,14 @@ export const textManifest: ComponentManifest = {
   name: 'Text',
   group: 'Componentes',
   summary:
-    'Sistema tipografico completo. Uma variante pra cada estilo (display, h1-h6, body, caption, overline, code), com peso, cor, alinhamento e truncate, tudo em tokens.',
+    'Sistema tipografico completo. Uma variante pra cada estilo (hero, display, h1-h6, body, caption, overline, label, code), com peso, tracking, cor, alinhamento e truncate, tudo em tokens. Titulos grandes usam a fonte display com tracking negativo.',
   import: "import { Text } from '@dilis/ui';",
   props: [
     {
       name: 'variant',
-      type: "'display' | 'h1'..'h6' | 'body' | 'body-sm' | 'caption' | 'overline' | 'code'",
+      type: "'hero' | 'display' | 'h1'..'h6' | 'body' | 'body-sm' | 'caption' | 'overline' | 'label' | 'code'",
       default: 'body',
-      description: 'Estilo tipografico. Define tamanho, peso e a tag HTML padrao.',
+      description: 'Estilo tipografico. Define tamanho, peso, tracking e a tag HTML padrao.',
     },
     {
       name: 'as',
@@ -20,8 +20,13 @@ export const textManifest: ComponentManifest = {
     },
     {
       name: 'weight',
-      type: "'light' | 'regular' | 'medium' | 'bold' | 'black'",
+      type: "'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'black'",
       description: 'Sobrescreve o peso da variante.',
+    },
+    {
+      name: 'tracking',
+      type: "'tighter' | 'tight' | 'normal' | 'wide' | 'wider'",
+      description: 'Sobrescreve o letter-spacing da variante.',
     },
     {
       name: 'color',
@@ -43,24 +48,24 @@ export const textManifest: ComponentManifest = {
   ],
   examples: [
     {
-      title: 'Titulo e paragrafo',
-      code: `<Text variant="h1">Titulo da pagina</Text>
-<Text variant="body" color="muted">Subtitulo em cinza.</Text>`,
+      title: 'Hero e titulo de secao',
+      code: `<Text variant="hero">Sua marca em movimento</Text>
+<Text variant="display">O que a gente faz</Text>`,
+    },
+    {
+      title: 'Rotulo de secao (label) e titulo',
+      code: `<Text variant="label">Servicos</Text>
+<Text variant="h2">Producao de eventos</Text>`,
     },
     {
       title: 'Trocar a tag mantendo o estilo',
       code: '<Text variant="h1" as="h2">Parece h1, mas e um h2 no HTML</Text>',
     },
-    {
-      title: 'Overline e code',
-      code: `<Text variant="overline">Secao</Text>
-<Text variant="code">npm install</Text>`,
-    },
   ],
   notes: [
-    'A tag HTML sai da variante (h1 => h1, body => p) e pode ser trocada com as.',
-    'variant define tamanho/peso; weight e color sobrescrevem quando preciso.',
-    'Herda os atributos do elemento (onClick, id, aria-*).',
+    'hero e display sao fluidos (clamp) e usam a fonte display com tracking negativo; bons pra topo de pagina e abertura de secao.',
+    'label e o rotulo de secao (fonte mono, azul da marca, tracking aberto); overline e a versao maiuscula neutra.',
+    'A tag HTML sai da variante (h1 => h1, body => p) e troca com as; weight e tracking sobrescrevem quando preciso.',
   ],
 };
 

@@ -6,6 +6,7 @@ import './Text.css';
 
 /** Tag HTML padrao de cada variante (pode ser trocada via prop as). */
 const defaultTag: Record<TextVariant, ElementType> = {
+  hero: 'h1',
   display: 'h1',
   h1: 'h1',
   h2: 'h2',
@@ -17,6 +18,7 @@ const defaultTag: Record<TextVariant, ElementType> = {
   'body-sm': 'p',
   caption: 'span',
   overline: 'span',
+  label: 'span',
   code: 'code',
 };
 
@@ -25,6 +27,7 @@ const TextBase = forwardRef<HTMLElement, TextProps>(function Text(
     variant = 'body',
     as,
     weight,
+    tracking,
     color = 'default',
     align,
     truncate = false,
@@ -42,6 +45,7 @@ const TextBase = forwardRef<HTMLElement, TextProps>(function Text(
         'dui-text',
         `dui-text--${variant}`,
         weight && `dui-text--w-${weight}`,
+        tracking && `dui-text--track-${tracking}`,
         color !== 'default' && `dui-text--c-${color}`,
         align && `dui-text--${align}`,
         truncate && 'dui-text--truncate',

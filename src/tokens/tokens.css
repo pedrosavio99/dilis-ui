@@ -43,12 +43,14 @@
 
   /* tipografia */
   --dui-font-base: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --dui-font-display: 'Geist', 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --dui-font-condensed: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
-  --dui-font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --dui-font-mono: 'Geist Mono', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --dui-weight-light: 300;
   --dui-weight-regular: 400;
   --dui-weight-medium: 500;
+  --dui-weight-semibold: 600;
   --dui-weight-bold: 700;
   --dui-weight-black: 900;
 
@@ -61,11 +63,22 @@
   --dui-text-3xl: 1.875rem;
   --dui-text-4xl: 2.25rem;
   --dui-text-5xl: 3rem;
+  /* tamanhos fluidos para titulos grandes (escala da LP) */
+  --dui-text-display: clamp(2.5rem, 5.6vw, 5.125rem);
+  --dui-text-hero: clamp(3.5rem, 8.6vw, 7.5rem);
 
+  --dui-leading-none: 0.95;
   --dui-leading-tight: 1.15;
   --dui-leading-snug: 1.35;
   --dui-leading-normal: 1.5;
   --dui-leading-relaxed: 1.7;
+
+  /* tracking (letter-spacing) */
+  --dui-tracking-tighter: -0.03em;
+  --dui-tracking-tight: -0.02em;
+  --dui-tracking-normal: 0;
+  --dui-tracking-wide: 0.06em;
+  --dui-tracking-wider: 0.12em;
 
   /* espacamento */
   --dui-space-none: 0;

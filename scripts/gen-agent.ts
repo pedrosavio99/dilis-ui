@@ -21,6 +21,7 @@ import type { ComponentManifest } from '../src/meta/manifest.types';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const componentsDir = join(root, 'src', 'components');
+const foundationDir = join(root, 'src', 'foundation');
 
 /** Anda recursivamente atras de arquivos *.manifest.ts. */
 function findManifests(dir: string): string[] {
@@ -34,7 +35,10 @@ function findManifests(dir: string): string[] {
 }
 
 async function main() {
-  const files = findManifests(componentsDir);
+  const files = [
+    ...findManifests(componentsDir),
+    ...(existsSync(foundationDir) ? findManifests(foundationDir) : []),
+  ];
   const manifests: ComponentManifest[] = [];
 
   for (const file of files) {

@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ElementType, ReactNode } from 'react';
 
 export type TextVariant =
+  | 'hero'
   | 'display'
   | 'h1'
   | 'h2'
@@ -12,9 +13,10 @@ export type TextVariant =
   | 'body-sm'
   | 'caption'
   | 'overline'
+  | 'label'
   | 'code';
 
-export type TextWeight = 'light' | 'regular' | 'medium' | 'bold' | 'black';
+export type TextWeight = 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'black';
 export type TextColor =
   | 'default'
   | 'muted'
@@ -25,6 +27,7 @@ export type TextColor =
   | 'danger'
   | 'inherit';
 export type TextAlign = 'left' | 'center' | 'right';
+export type TextTracking = 'tighter' | 'tight' | 'normal' | 'wide' | 'wider';
 
 export interface TextProps extends HTMLAttributes<HTMLElement> {
   /** Estilo tipografico. Padrao: body. */
@@ -33,6 +36,8 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
   as?: ElementType;
   /** Sobrescreve o peso da variante. */
   weight?: TextWeight;
+  /** Sobrescreve o tracking (letter-spacing) da variante. */
+  tracking?: TextTracking;
   /** Cor semantica do texto. Padrao: default. */
   color?: TextColor;
   /** Alinhamento do texto. */

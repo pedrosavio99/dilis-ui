@@ -2,7 +2,9 @@
  * Text (.dui-text)
  *
  * Sistema tipografico completo. Toda a escala vem dos tokens --dui-text-*,
- * --dui-weight-* e --dui-leading-*. Sem valor fixo de fonte. So classe unica.
+ * --dui-weight-*, --dui-leading-* e --dui-tracking-*. Titulos grandes usam a
+ * fonte display (--dui-font-display, Geist com fallback Roboto) com tracking
+ * negativo e leading apertado. So classe unica.
  */
 
 .dui-text {
@@ -12,32 +14,46 @@
 }
 
 /* escala / variantes */
+.dui-text--hero {
+  font-family: var(--dui-font-display);
+  font-size: var(--dui-text-hero);
+  font-weight: var(--dui-weight-semibold);
+  line-height: var(--dui-leading-none);
+  letter-spacing: var(--dui-tracking-tighter);
+}
 .dui-text--display {
-  font-size: var(--dui-text-5xl);
-  font-weight: var(--dui-weight-black);
-  line-height: var(--dui-leading-tight);
-  letter-spacing: -0.02em;
+  font-family: var(--dui-font-display);
+  font-size: var(--dui-text-display);
+  font-weight: var(--dui-weight-semibold);
+  line-height: 1.04;
+  letter-spacing: var(--dui-tracking-tighter);
 }
 .dui-text--h1 {
+  font-family: var(--dui-font-display);
   font-size: var(--dui-text-4xl);
-  font-weight: var(--dui-weight-bold);
+  font-weight: var(--dui-weight-semibold);
   line-height: var(--dui-leading-tight);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--dui-tracking-tight);
 }
 .dui-text--h2 {
+  font-family: var(--dui-font-display);
   font-size: var(--dui-text-3xl);
-  font-weight: var(--dui-weight-bold);
+  font-weight: var(--dui-weight-semibold);
   line-height: var(--dui-leading-tight);
+  letter-spacing: var(--dui-tracking-tight);
 }
 .dui-text--h3 {
+  font-family: var(--dui-font-display);
   font-size: var(--dui-text-2xl);
-  font-weight: var(--dui-weight-bold);
+  font-weight: var(--dui-weight-semibold);
   line-height: var(--dui-leading-snug);
+  letter-spacing: var(--dui-tracking-tight);
 }
 .dui-text--h4 {
   font-size: var(--dui-text-xl);
   font-weight: var(--dui-weight-medium);
   line-height: var(--dui-leading-snug);
+  letter-spacing: var(--dui-tracking-tight);
 }
 .dui-text--h5 {
   font-size: var(--dui-text-lg);
@@ -70,8 +86,16 @@
   font-weight: var(--dui-weight-medium);
   line-height: var(--dui-leading-normal);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--dui-tracking-wider);
   color: var(--dui-color-neutral-500);
+}
+.dui-text--label {
+  font-family: var(--dui-font-mono);
+  font-size: var(--dui-text-sm);
+  font-weight: var(--dui-weight-medium);
+  line-height: var(--dui-leading-normal);
+  letter-spacing: var(--dui-tracking-wide);
+  color: var(--dui-color-primary-600);
 }
 .dui-text--code {
   font-family: var(--dui-font-mono);
@@ -91,11 +115,31 @@
 .dui-text--w-medium {
   font-weight: var(--dui-weight-medium);
 }
+.dui-text--w-semibold {
+  font-weight: var(--dui-weight-semibold);
+}
 .dui-text--w-bold {
   font-weight: var(--dui-weight-bold);
 }
 .dui-text--w-black {
   font-weight: var(--dui-weight-black);
+}
+
+/* override de tracking (letter-spacing) */
+.dui-text--track-tighter {
+  letter-spacing: var(--dui-tracking-tighter);
+}
+.dui-text--track-tight {
+  letter-spacing: var(--dui-tracking-tight);
+}
+.dui-text--track-normal {
+  letter-spacing: var(--dui-tracking-normal);
+}
+.dui-text--track-wide {
+  letter-spacing: var(--dui-tracking-wide);
+}
+.dui-text--track-wider {
+  letter-spacing: var(--dui-tracking-wider);
 }
 
 /* cores semanticas */

@@ -3,12 +3,12 @@ import type { ComponentManifest } from '@dilis/ui';
 /**
  * Coleta TODOS os manifests da lib automaticamente.
  *
- * O glob varre `src/components/**\/*.manifest.ts` em tempo de build do Vite.
+ * O glob varre src/components e src/foundation em tempo de build do Vite.
  * Criou um componente novo com seu `.manifest.ts`? Ele aparece aqui sozinho,
  * sem editar lista nenhuma. Essa e a garantia de que a doc nunca desatualiza.
  */
 const modules = import.meta.glob<{ default?: ComponentManifest }>(
-  '../../src/components/**/*.manifest.ts',
+  ['../../src/components/**/*.manifest.ts', '../../src/foundation/**/*.manifest.ts'],
   { eager: true },
 );
 
