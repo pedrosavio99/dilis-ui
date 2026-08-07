@@ -20,13 +20,14 @@
 .dui-search__top-label {
   font-size: var(--dui-text-sm);
   font-weight: var(--dui-weight-medium);
+  letter-spacing: var(--dui-tracking-tight);
   color: var(--dui-color-neutral-700);
 }
 
 .dui-search__control {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--dui-space-sm);
   border-bottom: 1px solid var(--dui-color-neutral-200);
 }
@@ -35,7 +36,17 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  margin-bottom: var(--dui-space-sm);
   color: var(--dui-color-neutral-400);
+}
+.dui-search--sm .dui-search__icon {
+  margin-bottom: var(--dui-space-xs);
+}
+.dui-search--lg .dui-search__icon {
+  margin-bottom: var(--dui-space-md);
+}
+.dui-search--floating .dui-search__icon {
+  margin-bottom: 0.35rem;
 }
 
 .dui-search__field {
@@ -76,9 +87,13 @@
   color: var(--dui-color-neutral-400);
   cursor: pointer;
   padding: var(--dui-space-xs);
+  margin-bottom: calc(var(--dui-space-sm) - var(--dui-space-xs));
   border-radius: var(--dui-radius-full);
   transition: color var(--dui-transition-fast),
     background-color var(--dui-transition-fast);
+}
+.dui-search--floating .dui-search__clear {
+  margin-bottom: 0;
 }
 .dui-search__clear:hover {
   color: var(--dui-color-neutral-700);
@@ -117,6 +132,7 @@
   top: 1.25rem;
   color: var(--dui-color-neutral-400);
   font-size: var(--dui-text-md);
+  letter-spacing: var(--dui-tracking-tight);
   pointer-events: none;
   transform-origin: left top;
   transition: transform var(--dui-transition-base),

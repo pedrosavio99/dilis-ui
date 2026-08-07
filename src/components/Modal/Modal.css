@@ -1,0 +1,142 @@
+/**
+ * Modal (.dui-modal)
+ *
+ * Overlay + painel centralizado, renderizado por portal no body. Fecha no X,
+ * no scrim (so o clique no scrim, nunca no conteudo) e no Esc. Trava o scroll
+ * do fundo enquanto aberto. Cor do scrim vem de --dui-modal-scrim (local,
+ * sobrescrivel). So classe unica.
+ */
+
+.dui-modal {
+  --dui-modal-scrim: rgba(26, 26, 26, 0.5);
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--dui-space-lg);
+  background: var(--dui-modal-scrim);
+  animation: dui-modal-scrim-in var(--dui-transition-base);
+}
+
+.dui-modal__panel {
+  --dui-modal-max: 32rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--dui-modal-max);
+  max-height: 90vh;
+  background: var(--dui-color-neutral-0);
+  border-radius: var(--dui-radius-lg);
+  box-shadow: var(--dui-shadow-xl);
+  overflow: hidden;
+  outline: none;
+  animation: dui-modal-in var(--dui-transition-base) both;
+}
+.dui-modal__panel--sm {
+  --dui-modal-max: 24rem;
+}
+.dui-modal__panel--md {
+  --dui-modal-max: 32rem;
+}
+.dui-modal__panel--lg {
+  --dui-modal-max: 48rem;
+}
+
+.dui-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--dui-space-md);
+  padding: var(--dui-space-lg) var(--dui-space-lg) var(--dui-space-sm);
+}
+.dui-modal__heading {
+  min-width: 0;
+}
+.dui-modal__title {
+  margin: 0;
+  font-family: var(--dui-font-display);
+  font-size: var(--dui-text-xl);
+  font-weight: var(--dui-weight-semibold);
+  letter-spacing: var(--dui-tracking-tight);
+  line-height: var(--dui-leading-snug);
+  color: var(--dui-color-neutral-900);
+}
+.dui-modal__desc {
+  margin: var(--dui-space-xs) 0 0;
+  font-size: var(--dui-text-sm);
+  line-height: var(--dui-leading-normal);
+  color: var(--dui-color-neutral-500);
+}
+.dui-modal__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: var(--dui-color-neutral-500);
+  cursor: pointer;
+  border-radius: var(--dui-radius-full);
+  transition: background-color var(--dui-transition-fast),
+    color var(--dui-transition-fast);
+}
+.dui-modal__close:hover {
+  background: var(--dui-color-neutral-100);
+  color: var(--dui-color-neutral-800);
+}
+.dui-modal__close:focus-visible {
+  outline: 2px solid var(--dui-color-primary-400);
+  outline-offset: 2px;
+}
+
+.dui-modal__body {
+  padding: 0 var(--dui-space-lg) var(--dui-space-lg);
+  overflow-y: auto;
+  color: var(--dui-color-neutral-700);
+  font-size: var(--dui-text-md);
+  line-height: var(--dui-leading-normal);
+}
+/* sem header, o corpo recupera o respiro do topo */
+.dui-modal__panel > .dui-modal__body:first-child {
+  padding-top: var(--dui-space-lg);
+}
+
+.dui-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--dui-space-sm);
+  padding: var(--dui-space-md) var(--dui-space-lg);
+  border-top: 1px solid var(--dui-color-neutral-100);
+}
+
+@keyframes dui-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes dui-modal-scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-modal,
+  .dui-modal__panel {
+    animation-duration: 1ms;
+  }
+}

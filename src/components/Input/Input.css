@@ -23,6 +23,7 @@
 .dui-input__top-label {
   font-size: var(--dui-text-sm);
   font-weight: var(--dui-weight-medium);
+  letter-spacing: var(--dui-tracking-tight);
   color: var(--dui-color-neutral-700);
 }
 
@@ -93,6 +94,7 @@
   top: 1.25rem;
   color: var(--dui-color-neutral-400);
   font-size: var(--dui-text-md);
+  letter-spacing: var(--dui-tracking-tight);
   pointer-events: none;
   transform-origin: left top;
   transition: transform var(--dui-transition-base),

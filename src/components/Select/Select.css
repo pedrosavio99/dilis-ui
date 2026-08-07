@@ -19,6 +19,7 @@
 .dui-select__top-label {
   font-size: var(--dui-text-sm);
   font-weight: var(--dui-weight-medium);
+  letter-spacing: var(--dui-tracking-tight);
   color: var(--dui-color-neutral-700);
 }
 
@@ -108,6 +109,7 @@
   transform-origin: left top;
   transition: transform var(--dui-transition-base),
     color var(--dui-transition-base);
+  letter-spacing: var(--dui-tracking-tight);
 }
 .dui-select--floating.dui-select--open .dui-select__label,
 .dui-select--floating.dui-select--filled .dui-select__label {

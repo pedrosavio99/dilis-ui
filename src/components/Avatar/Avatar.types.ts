@@ -11,6 +11,10 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   alt?: string;
   /** Tamanho. Padrao: md. */
   size?: AvatarSize;
+  /** Cor de fundo custom. Sobrescreve a cor automatica derivada do nome. */
+  bgColor?: string;
+  /** Cor do texto (iniciais) e do icone de fallback. */
+  textColor?: string;
   /** Classe extra. Entra por ultimo, sobrescreve o estilo base. */
   className?: string;
 }

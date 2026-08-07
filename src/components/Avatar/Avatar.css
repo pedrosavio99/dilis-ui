@@ -16,7 +16,7 @@
   background: var(--dui-color-neutral-100);
   color: var(--dui-color-neutral-500);
   font-family: var(--dui-font-base);
-  font-weight: var(--dui-weight-medium);
+  font-weight: var(--dui-weight-semibold);
   line-height: 1;
   user-select: none;
 }
@@ -30,6 +30,7 @@
 
 .dui-avatar__initials {
   text-transform: uppercase;
+  letter-spacing: var(--dui-tracking-tight);
 }
 
 .dui-avatar__icon {

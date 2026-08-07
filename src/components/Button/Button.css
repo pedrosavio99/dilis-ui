@@ -14,6 +14,7 @@
   gap: var(--dui-space-sm);
   font-family: var(--dui-font-base);
   font-weight: var(--dui-weight-medium);
+  letter-spacing: var(--dui-tracking-tight);
   line-height: 1;
   border: 1px solid transparent;
   border-radius: var(--dui-radius-md);

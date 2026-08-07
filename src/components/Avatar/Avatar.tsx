@@ -1,4 +1,5 @@
 import { forwardRef, memo, useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { cn } from '../../utils/cn';
 import type { AvatarProps } from './Avatar.types';
 import './Avatar.css';
@@ -34,7 +35,7 @@ function FallbackIcon() {
 }
 
 const AvatarBase = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  { src, name, alt, size = 'md', className, ...rest },
+  { src, name, alt, size = 'md', bgColor, textColor, className, style, ...rest },
   ref,
 ) {
   const [imgError, setImgError] = useState(false);
@@ -46,8 +47,21 @@ const AvatarBase = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
 
   const showImage = Boolean(src) && !imgError;
   const initials = name ? getInitials(name) : '';
+
+  // cor custom (bgColor/textColor) tem prioridade sobre a paleta automatica
+  const custom = Boolean(bgColor || textColor);
   const colorClass =
-    !showImage && initials ? `dui-avatar--c${colorIndex(name ?? '')}` : undefined;
+    !custom && !showImage && initials
+      ? `dui-avatar--c${colorIndex(name ?? '')}`
+      : undefined;
+
+  const mergedStyle: CSSProperties | undefined = custom
+    ? {
+        ...style,
+        ...(bgColor ? { backgroundColor: bgColor } : null),
+        ...(textColor ? { color: textColor } : null),
+      }
+    : style;
 
   const a11y = showImage
     ? {}
@@ -57,6 +71,7 @@ const AvatarBase = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
     <span
       ref={ref}
       className={cn('dui-avatar', `dui-avatar--${size}`, colorClass, className)}
+      style={mergedStyle}
       {...a11y}
       {...rest}
     >

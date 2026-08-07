@@ -4,7 +4,7 @@ export const avatarManifest: ComponentManifest = {
   name: 'Avatar',
   group: 'Componentes',
   summary:
-    'Avatar circular em 3 tamanhos. Mostra a imagem de src (caminho ou link) ou, na falta/erro dela, as iniciais de name (1 ou 2 letras) com cor derivada do nome.',
+    'Avatar circular em 3 tamanhos. Mostra a imagem de src (caminho ou link) ou, na falta/erro dela, as iniciais de name (1 ou 2 letras) com cor derivada do nome. Da pra forcar bgColor e textColor.',
   import: "import { Avatar } from '@dilis/ui';",
   props: [
     {
@@ -28,6 +28,16 @@ export const avatarManifest: ComponentManifest = {
       default: 'md',
       description: 'Tamanho do avatar.',
     },
+    {
+      name: 'bgColor',
+      type: 'string',
+      description: 'Cor de fundo custom. Sobrescreve a cor automatica derivada do nome.',
+    },
+    {
+      name: 'textColor',
+      type: 'string',
+      description: 'Cor das iniciais e do icone de fallback.',
+    },
   ],
   examples: [
     {
@@ -35,20 +45,18 @@ export const avatarManifest: ComponentManifest = {
       code: '<Avatar src="/fotos/ana.jpg" name="Ana Souza" />',
     },
     {
-      title: 'Com iniciais (sem imagem)',
+      title: 'Com iniciais (cor automatica pelo nome)',
       code: '<Avatar name="Pedro Savio" size="lg" />',
     },
     {
-      title: 'Tamanhos',
-      code: `<Avatar name="Ana" size="sm" />
-<Avatar name="Ana" size="md" />
-<Avatar name="Ana" size="lg" />`,
+      title: 'Cor de fundo e texto custom',
+      code: '<Avatar name="Dilis" bgColor="#009fe3" textColor="#ffffff" />',
     },
   ],
   notes: [
     'name com 1 palavra vira 1 letra; com 2+ vira inicial do primeiro e do ultimo.',
-    'Se src falhar ao carregar, cai automaticamente nas iniciais.',
-    'Sem src nem name, mostra um icone generico de usuario.',
+    'bgColor/textColor tem prioridade sobre a cor automatica; sem eles, a cor sai do hash do nome.',
+    'Se src falhar ao carregar, cai automaticamente nas iniciais. Sem src nem name, mostra icone generico.',
   ],
 };
 

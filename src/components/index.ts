@@ -6,3 +6,5 @@ export * from './Avatar';
 export * from './Table';
 export * from './Text';
 export * from './DatePicker';
+export * from './Modal';
+export * from './Checkbox';

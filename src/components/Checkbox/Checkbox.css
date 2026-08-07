@@ -1,0 +1,155 @@
+/**
+ * Checkbox (.dui-checkbox)
+ *
+ * input nativo escondido (mas focavel) + caixinha custom desenhada por CSS.
+ * Estado marcado/indeterminado vem dos seletores :checked / :indeterminate do
+ * proprio input. Cor vem de --dui-check-accent. So classe unica.
+ */
+
+.dui-checkbox {
+  --dui-check-accent: var(--dui-color-primary-500);
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--dui-space-sm);
+  font-family: var(--dui-font-base);
+  cursor: pointer;
+}
+.dui-checkbox--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* input escondido mas ainda focavel/acessivel */
+.dui-checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dui-checkbox__box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid var(--dui-color-neutral-300);
+  border-radius: var(--dui-radius-sm);
+  background: var(--dui-color-neutral-0);
+  color: var(--dui-color-neutral-0);
+  transition: background-color var(--dui-transition-fast),
+    border-color var(--dui-transition-fast);
+}
+
+.dui-checkbox__check {
+  width: 80%;
+  height: 80%;
+  opacity: 0;
+  transition: opacity var(--dui-transition-fast);
+}
+.dui-checkbox__dash {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity var(--dui-transition-fast);
+}
+
+/* marcado */
+.dui-checkbox__input:checked ~ .dui-checkbox__box {
+  background: var(--dui-check-accent);
+  border-color: var(--dui-check-accent);
+}
+.dui-checkbox__input:checked ~ .dui-checkbox__box .dui-checkbox__check {
+  opacity: 1;
+}
+
+/* indeterminado (vence o marcado no visual) */
+.dui-checkbox__input:indeterminate ~ .dui-checkbox__box {
+  background: var(--dui-check-accent);
+  border-color: var(--dui-check-accent);
+}
+.dui-checkbox__input:indeterminate ~ .dui-checkbox__box .dui-checkbox__check {
+  opacity: 0;
+}
+.dui-checkbox__input:indeterminate ~ .dui-checkbox__box .dui-checkbox__dash {
+  opacity: 1;
+}
+
+/* foco */
+.dui-checkbox__input:focus-visible ~ .dui-checkbox__box {
+  outline: 2px solid var(--dui-check-accent);
+  outline-offset: 2px;
+}
+
+/* desabilitado */
+.dui-checkbox__input:disabled ~ .dui-checkbox__box {
+  border-color: var(--dui-color-neutral-200);
+  background: var(--dui-color-neutral-100);
+}
+.dui-checkbox__input:disabled:checked ~ .dui-checkbox__box,
+.dui-checkbox__input:disabled:indeterminate ~ .dui-checkbox__box {
+  background: var(--dui-color-neutral-300);
+  border-color: var(--dui-color-neutral-300);
+}
+
+/* texto */
+.dui-checkbox__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dui-checkbox__label {
+  color: var(--dui-color-neutral-800);
+  letter-spacing: var(--dui-tracking-tight);
+  line-height: var(--dui-leading-snug);
+}
+.dui-checkbox__desc {
+  font-size: var(--dui-text-sm);
+  color: var(--dui-color-neutral-500);
+  line-height: var(--dui-leading-snug);
+}
+
+/* tamanhos */
+.dui-checkbox--sm .dui-checkbox__box {
+  width: 1rem;
+  height: 1rem;
+}
+.dui-checkbox--sm .dui-checkbox__label {
+  font-size: var(--dui-text-sm);
+}
+.dui-checkbox--md .dui-checkbox__box {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.dui-checkbox--md .dui-checkbox__label {
+  font-size: var(--dui-text-md);
+}
+.dui-checkbox--lg .dui-checkbox__box {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+.dui-checkbox--lg .dui-checkbox__label {
+  font-size: var(--dui-text-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dui-checkbox__box,
+  .dui-checkbox__check,
+  .dui-checkbox__dash {
+    transition-duration: 1ms;
+  }
+}

@@ -17,6 +17,10 @@ import { TextView } from "../views/TextView";
 
 import { DatePickerView } from "../views/DatePickerView";
 
+import { ModalView } from "../views/ModalView";
+
+import { CheckboxView } from "../views/CheckboxView";
+
 export interface MuralEntry {
   id: string;
   label: string;
@@ -41,6 +45,8 @@ export const registry: MuralEntry[] = [
   { id: "table", label: "Table", group: "Componentes", view: TableView },
   { id: "typography", label: "Typography", group: "Fundacao", view: TextView },
   { id: "datepicker", label: "DatePicker", group: "Componentes", view: DatePickerView },
+  { id: "modal", label: "Modal", group: "Componentes", view: ModalView },
+  { id: "checkbox", label: "Checkbox", group: "Componentes", view: CheckboxView },
 ];
 
 /** Agrupa as entradas por grupo, preservando a ordem de insercao. */

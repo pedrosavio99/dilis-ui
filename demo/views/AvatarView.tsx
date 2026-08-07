@@ -59,6 +59,19 @@ export function AvatarView() {
       </Example>
 
       <Example
+        title="Cor de fundo e texto custom (bgColor / textColor)"
+        code={`<Avatar name="Dilis" bgColor="#009fe3" textColor="#ffffff" size="lg" />
+<Avatar name="Nala" bgColor="#333333" textColor="#ffffff" size="lg" />
+<Avatar name="Ana Souza" bgColor="#e6f6fd" textColor="#0087c1" size="lg" />`}
+      >
+        <div className="row">
+          <Avatar name="Dilis" bgColor="#009fe3" textColor="#ffffff" size="lg" />
+          <Avatar name="Nala" bgColor="#333333" textColor="#ffffff" size="lg" />
+          <Avatar name="Ana Souza" bgColor="#e6f6fd" textColor="#0087c1" size="lg" />
+        </div>
+      </Example>
+
+      <Example
         title="Fallback (imagem quebrada cai nas iniciais)"
         code={`<Avatar src="/nao-existe.jpg" name="Ana Souza" size="lg" />`}
       >

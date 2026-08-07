@@ -19,6 +19,7 @@
 .dui-table__th {
   text-align: left;
   font-weight: var(--dui-weight-medium);
+  letter-spacing: var(--dui-tracking-tight);
   color: var(--dui-color-neutral-600);
   border-bottom: 1px solid var(--dui-color-neutral-200);
   white-space: nowrap;
